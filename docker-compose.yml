@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  sql-server-2022:
+    container_name: n4mr0i-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    hostname: n4mr0idb
+    restart: always
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Abc@1234
+      - MSSQL_AGENT_ENABLED=1
+      - MSSQL_ENCRYPT=false
+    ports:
+      - 1433:1433
+    volumes:
+      - ./data:/var/opt/mssql
+      - ./bk:/var/opt/mssql/backup
+    user: root
+
+# docker exec n4mr0i-db /var/opt/mssql/backup/restore.sh
